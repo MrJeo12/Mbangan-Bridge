@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;   //Movement speed
     private Rigidbody2D body;   //Reference to the physics component
     private bool grounded;  //Tracks if the player is touching the ground
+    private bool onWall; //Tracks if player is on wall
 
     private void Awake()
     {
@@ -37,6 +38,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Check if collision is with ground object
+        if (collision.gameObject.tag == "Ground")
+            grounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
         //Check if collision is with ground object
         if (collision.gameObject.tag == "Ground")
