@@ -15,17 +15,17 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");    //Get the horizontal input (-1 for left, 1 for right, 0 for no input)
-        body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);  //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
-
+                                                                //
         // Only apply horizontal movement when grounded
         if (grounded)
         {
-            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
-        }
-        
+            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
 
-            // Jump when space is pressed AND player is grounded
-            if (Input.GetKey(KeyCode.Space) && grounded)
+        }
+
+
+        // Jump when space is pressed AND player is grounded
+        if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();
 
     }
