@@ -2,22 +2,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float speed;        // How quickly the camera moves between rooms (lower = slower)
-    private float currentPosX;                   // Target X position the camera is moving towards
-    private Vector3 velocity = Vector3.zero;     // Reference velocity used by SmoothDamp for smooth movement
+    [SerializeField] private Transform player;        //Reference to the player's transform
+    [SerializeField] private float smoothSpeed = 0.125f; //How smoothly the camera follows the player
+    [SerializeField] private Vector3 offset;          //Camera position offset from player
 
     private void Update()
     {
-        // Smoothly move camera to target X position while keeping current Y and Z positions
-        // SmoothDamp creates smooth easing movement instead of instant snapping
-        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(currentPosX, transform.position.y, transform.position.z), ref velocity, speed);
-    }
+        //Check if player reference exists to prevent errors
+        if (player != null)
+        {
+            //Calculate the desired camera position based on player position and offset
+            Vector3 desiredPosition = player.position + offset;
 
-    public void MoveToNewRoom(Transform _newRoom)
-    {
-        // Set new target X position based on the new room's position
-        // This will make the camera smoothly move to focus on the new room
-        currentPosX = _newRoom.position.x;
+            //Smoothly interpolate between current camera position and desired position
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+            //Apply the smoothed position to the camera while maintaining Z position
+            transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
+        }
     }
 }
-
