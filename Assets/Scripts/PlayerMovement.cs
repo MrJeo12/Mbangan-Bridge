@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;   //Movement speed
     private Rigidbody2D body;   //Reference to the physics component
     private bool grounded;  //Tracks if the player is touching the ground
-    private bool onWall; //Tracks if player is on wall
 
     private void Awake()
     {
@@ -18,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");    //Get the horizontal input (-1 for left, 1 for right, 0 for no input)
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
 
-        // Jump when space is pressed AND player is grounded
+
+        // Jump when space is pressed AND player is grounded. Prevents infinite jumping mid air
         if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();
 
@@ -34,13 +34,13 @@ public class PlayerMovement : MonoBehaviour
     {
         //Check if collision is with ground object
         if (collision.gameObject.tag == "Ground")
-            grounded = true;
+            grounded = true; // Player is now on solid ground and can jump again
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         //Check if collision is with ground object
         if (collision.gameObject.tag == "Ground")
-            grounded = true;
+            grounded = false; // Player is no longer touching ground, cannot jump
     }
 }
