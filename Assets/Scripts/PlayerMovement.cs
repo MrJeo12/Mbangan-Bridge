@@ -32,12 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Check if collision is with ground object
-        if (collision.gameObject.tag == "Ground")
+        //Only count as grounded if collision is coming from below (prevents wall climbing)
+        if (collision.gameObject.tag == "Ground" && IsCollisionFromBelow(collision))
             grounded = true; //Player is now on solid ground and can jump again
 
-        //Check if collision is with platform object  
-        if (collision.gameObject.tag == "Platform")
+        //Only count as on platform if collision is coming from below (prevents wall climbing)
+        if (collision.gameObject.tag == "Platform" && IsCollisionFromBelow(collision))
             onPlatform = true; //Player is now on solid platform and can jump again
     }
 
@@ -52,14 +52,18 @@ public class PlayerMovement : MonoBehaviour
             onPlatform = false; //Player is no longer touching platform, cannot jump
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private bool IsCollisionFromBelow(Collision2D collision)
     {
-        //Continuously check if we're touching ground or platform to maintain jump ability
-        //This ensures jumping never fails due to edge sticking or collision detection issues
-        if (collision.gameObject.tag == "Ground")
-            grounded = true; //Player is still touching ground and can jump
-
-        if (collision.gameObject.tag == "Platform")
-            onPlatform = false; //Player is still touching platform and can jump
+        //Check if the collision is coming from below the player (meaning player is on top)
+        //This prevents counting side collisions as "grounded"
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            //If the contact point is below the player's center, it's a ground/platform from below
+            if (contact.point.y < transform.position.y)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
