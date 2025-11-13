@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;   //Movement speed and jump power
+    [SerializeField] private float speed;   //Movement speed
     private Rigidbody2D body;   //Reference to the physics component
     private bool grounded;  //Tracks if the player is touching the ground
     private bool onPlatform; //Tracks if player is on a platform
 
     private void Awake()
     {
-        //Get the Rigidbody component attached to this GameObject
+        //Get the Rigidbody component attactched to this GameObject
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -18,9 +18,12 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");    //Get the horizontal input (-1 for left, 1 for right, 0 for no input)
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
 
-        //Jump when space is pressed AND player is grounded or on platform. Prevents infinite jumping mid air
+
+        // Jump when space is pressed AND player is grounded or on platform. Prevents infinite jumping mid air
         if (Input.GetKey(KeyCode.Space) && (grounded || onPlatform))
             Jump();
+
+
     }
 
     private void Jump()
@@ -32,38 +35,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Only count as grounded if collision is coming from below (prevents wall climbing)
-        if (collision.gameObject.tag == "Ground" && IsCollisionFromBelow(collision))
+        //Check if collision is with ground or platform object
+        if (collision.gameObject.tag == "Ground")
             grounded = true; //Player is now on solid ground and can jump again
 
-        //Only count as on platform if collision is coming from below (prevents wall climbing)
-        if (collision.gameObject.tag == "Platform" && IsCollisionFromBelow(collision))
-            onPlatform = true; //Player is now on solid platform and can jump again
+        if (collision.gameObject.tag == "Platform")
+            grounded = true; //Player is now on solid platform and can jump again
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //Check if collision is with ground object
+        //Check if collision is with ground or platform object
         if (collision.gameObject.tag == "Ground")
             grounded = false; //Player is no longer touching ground, cannot jump
 
-        //Check if collision is with platform object
         if (collision.gameObject.tag == "Platform")
-            onPlatform = false; //Player is no longer touching platform, cannot jump
-    }
-
-    private bool IsCollisionFromBelow(Collision2D collision)
-    {
-        //Check if the collision is coming from below the player (meaning player is on top)
-        //This prevents counting side collisions as "grounded"
-        foreach (ContactPoint2D contact in collision.contacts)
-        {
-            //If the contact point is below the player's center, it's a ground/platform from below
-            if (contact.point.y < transform.position.y)
-            {
-                return true;
-            }
-        }
-        return false;
+            grounded = false; //Player is no longer touching platform, cannot jump
     }
 }
