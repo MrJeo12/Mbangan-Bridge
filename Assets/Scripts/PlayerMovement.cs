@@ -90,10 +90,4 @@ public class PlayerMovement : MonoBehaviour
             onPlatform = false; //Player is no longer touching platform, cannot jump
     }
 
-    //Visualize the wall detection ray in Scene view (for debugging)
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, new Vector2(Input.GetAxis("Horizontal"), 0) * wallSlideDetection);
-    }
 }
