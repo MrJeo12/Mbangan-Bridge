@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;   //Movement speed
     private Rigidbody2D body;   //Reference to the physics component
     private bool grounded;  //Tracks if the player is touching the ground
+    private bool onPlatform; //Tracks if player is on a platform
 
     private void Awake()
     {
@@ -18,8 +19,12 @@ public class PlayerMovement : MonoBehaviour
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
 
 
-        // Jump when space is pressed AND player is grounded. Prevents infinite jumping mid air
+        // Jump when space is pressed AND player is grounded or on platform. Prevents infinite jumping mid air
         if (Input.GetKey(KeyCode.Space) && grounded)
+        {
+            Jump();
+
+        } else if (Input.GetKey(KeyCode.Space) && onPlatform)
             Jump();
 
     }
@@ -28,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         body.linearVelocity = new Vector2(body.linearVelocity.x, speed);    //Apply upward velocity for jumping
         grounded = false;   //Player is no longer grounded
+        onPlatform = false; //Player is no longer on platform
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
