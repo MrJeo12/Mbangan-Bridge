@@ -60,6 +60,6 @@ public class PlayerMovement : MonoBehaviour
             grounded = true; //Player is still touching ground and can jump
 
         if (collision.gameObject.tag == "Platform")
-            onPlatform = true; //Player is still touching platform and can jump
+            onPlatform = false; //Player is still touching platform and can jump
     }
 }
