@@ -7,6 +7,7 @@ public class PlayerFearController : MonoBehaviour
     [SerializeField] private float fearDuration = 5f;    //How long invisibility lasts
     [SerializeField] private float fearCooldown = 6f;    //Cooldown between uses
     [SerializeField] private GameObject fearEffect;      //Visual effect when using fear
+    [SerializeField] private LayerMask enemyLayer;       //Layer for enemies - assign in Inspector
 
     private bool isFearActive = false;     //Is fear currently active?
     private bool isOnCooldown = false;     //Is fear on cooldown?
@@ -50,35 +51,39 @@ public class PlayerFearController : MonoBehaviour
         if (playerSprite != null)
         {
             Color transparentColor = originalColor;
-            transparentColor.a = 0.3f; //30% opacity (adjust as needed)
+            transparentColor.a = 0.3f; //30% opacity
             playerSprite.color = transparentColor;
         }
 
-        //Disable player collider to pass through enemies
+        //Disable collision with enemies only (not ground!)
         if (playerCollider != null)
         {
-            playerCollider.enabled = false;
+            //Ignore collision with all objects on enemy layer
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+                if (enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, enemyCollider, true);
+                }
+            }
         }
 
-        //Show visual effect (particles, etc.)
+        //Show visual effect
         if (fearEffect != null)
             fearEffect.SetActive(true);
 
         //Start timer to deactivate fear
         StartCoroutine(DeactivateFearAfterTime());
 
-        Debug.Log("Fear activated! Player is invisible and can pass through enemies.");
+        Debug.Log("Fear activated! Player can pass through enemies but not ground.");
     }
 
     private IEnumerator DeactivateFearAfterTime()
     {
-        //Wait for fear duration to complete
         yield return new WaitForSeconds(fearDuration);
-
-        //Deactivate fear and restore normal state
         DeactivateFear();
-
-        //Start cooldown period
         isOnCooldown = true;
         StartCoroutine(ResetCooldown());
     }
@@ -93,10 +98,18 @@ public class PlayerFearController : MonoBehaviour
             playerSprite.color = originalColor;
         }
 
-        //Re-enable player collider
+        //Re-enable collision with enemies
         if (playerCollider != null)
         {
-            playerCollider.enabled = true;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+                if (enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, enemyCollider, false);
+                }
+            }
         }
 
         //Hide visual effect
@@ -108,13 +121,11 @@ public class PlayerFearController : MonoBehaviour
 
     private IEnumerator ResetCooldown()
     {
-        //Wait for cooldown period
         yield return new WaitForSeconds(fearCooldown);
         isOnCooldown = false;
         Debug.Log("Fear power ready! Press E to activate.");
     }
 
-    //Public method for enemies to check if player is invisible
     public bool IsPlayerInvisible()
     {
         return isFearActive;
