@@ -10,7 +10,7 @@ public class DeathTrigger : MonoBehaviour
         currentCheckpoint = newCheckpoint;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)  //Changed to Collider2D
     {
         //Check if the colliding object is the player AND we have a checkpoint
         if (collision.CompareTag("Player") && currentCheckpoint != null)
@@ -18,8 +18,8 @@ public class DeathTrigger : MonoBehaviour
             //Teleport player back to checkpoint
             collision.transform.position = currentCheckpoint.position;
 
-            //Reset player velocity
-            Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
+            //Reset player velocity - use collision.gameObject
+            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
             if (playerRb != null)
             {
                 playerRb.linearVelocity = Vector2.zero;
