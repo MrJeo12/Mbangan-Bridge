@@ -1,23 +1,22 @@
 using UnityEngine;
 
-public class JetroFearNPC : MonoBehaviour
+public class FearNPC : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;  //Reference to dialogue UI
-    [SerializeField] private string dialogueText = "I grant you the power of FEAR! Press E to become invisible to enemies for 5 seconds.";
 
     private bool playerInRange = false;
+    private bool powerGranted = false;  //Prevent granting power multiple times
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !powerGranted)
         {
             playerInRange = true;
+            Debug.Log("Player entered NPC trigger zone");
 
             //Show dialogue
             if (dialogueBox != null)
                 dialogueBox.SetActive(true);
-
-            Debug.Log(dialogueText);
         }
     }
 
@@ -26,6 +25,7 @@ public class JetroFearNPC : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInRange = false;
+            Debug.Log("Player left NPC trigger zone");
 
             //Hide dialogue
             if (dialogueBox != null)
@@ -35,8 +35,8 @@ public class JetroFearNPC : MonoBehaviour
 
     private void Update()
     {
-        //If player is in range and presses interact key (E key example)
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        //If player is in range and presses interact key (E key)
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !powerGranted)
         {
             GrantFearPower();
         }
@@ -49,14 +49,19 @@ public class JetroFearNPC : MonoBehaviour
         if (playerFear != null)
         {
             playerFear.UnlockFearPower();
-            Debug.Log("Fear power granted!");
+            powerGranted = true;
+            Debug.Log("Fear power granted to player!");
 
             //Hide dialogue after granting power
             if (dialogueBox != null)
                 dialogueBox.SetActive(false);
 
-            //Disable NPC after granting power
-            this.enabled = false;
+            //Optional: Disable NPC collider so player can't interact again
+            GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            Debug.LogError("PlayerFearController not found in scene!");
         }
     }
 }
