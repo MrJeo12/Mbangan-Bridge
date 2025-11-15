@@ -11,7 +11,7 @@ public class SceneTransition : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Load the specified scene when player enters the trigger
-            SceneManager.LoadScene(Level2);
+            SceneManager.LoadScene(levelName);
         }
     }
 }
