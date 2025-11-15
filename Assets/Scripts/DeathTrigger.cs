@@ -26,4 +26,12 @@ public class DeathTrigger : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GetCurrentCheckpoint()
+    {
+        // Check if a checkpoint has been set, otherwise return default position
+        // If currentCheckpoint exists, return its position coordinates (x, y, z)
+        // If currentCheckpoint is null (no checkpoint set), return Vector3.zero (0, 0, 0) as fallback
+        return currentCheckpoint != null ? currentCheckpoint.position : Vector3.zero;
+    }
 }
