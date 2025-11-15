@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    [SerializeField] private string Level2;  //Name of the scene to load when player enters trigger
+    [SerializeField] private string levelName;  //Name of the scene to load when player enters trigger
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

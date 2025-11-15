@@ -42,14 +42,30 @@ public class PlayerMovement : MonoBehaviour
             onPlatform = true; //Player is now on solid platform and can jump again
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //Continous check if player is touching ground or platform
+        //This prevents losing jump ability during quick movements or running
+        if (collision.gameObject.tag == "Ground")
+            grounded = true; //Player is still on solid ground
+
+        if (collision.gameObject.tag == "Platform")
+            onPlatform = true; //Player is still on solid platform
+    }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //Check if collision is with ground object
+        //Only set to false if leaving the specific surface we were on
         if (collision.gameObject.tag == "Ground")
-            grounded = false; //Player is no longer touching ground, cannot jump
+        {
+            //Only set grounded to false if we're actually leaving ground
+            //This prevents false negatives during quick movements
+            grounded = false;
+        }
 
-        //Check if collision is with platform object
         if (collision.gameObject.tag == "Platform")
-            onPlatform = false; //Player is no longer touching platform, cannot jump
+        {
+            onPlatform = false;
+        }
     }
 }

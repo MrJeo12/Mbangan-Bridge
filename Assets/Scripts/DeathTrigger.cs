@@ -2,36 +2,50 @@ using UnityEngine;
 
 public class DeathTrigger : MonoBehaviour
 {
-    private Transform currentCheckpoint;  //Current active checkpoint
+    private Vector3 currentCheckpoint;  //Store checkpoint position directly instead of Transform reference
+
+    private void Start()
+    {
+        //Auto set initial checkpoint to player's starting position
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            currentCheckpoint = player.transform.position; //Store position, not transform reference
+        }
+    }
 
     //Method to update the checkpoint (called by Checkpoint script)
     public void UpdateCheckpoint(Transform newCheckpoint)
     {
-        currentCheckpoint = newCheckpoint;
+        currentCheckpoint = newCheckpoint.position; //Store the position, not the transform
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)  //Changed to Collider2D
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Check if the colliding object is the player AND we have a checkpoint
-        if (collision.CompareTag("Player") && currentCheckpoint != null)
+        //Check if the colliding object is the player
+        if (collision.CompareTag("Player"))
         {
-            //Teleport player back to checkpoint
-            collision.transform.position = currentCheckpoint.position;
+            //Teleport player back to checkpoint position
+            collision.transform.position = currentCheckpoint;
 
-            //Reset player velocity - use collision.gameObject
+            //Reset player velocity to prevent sliding after respawn
             Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
             if (playerRb != null)
             {
                 playerRb.linearVelocity = Vector2.zero;
+            }
+
+            //Reset fear power if active (make sure PlayerFearController has this method)
+            PlayerFearController fearController = collision.GetComponent<PlayerFearController>();
+            if (fearController != null)
+            {
+                fearController.ForceDeactivateFear();
             }
         }
     }
 
     public Vector3 GetCurrentCheckpoint()
     {
-        // Check if a checkpoint has been set, otherwise return default position
-        // If currentCheckpoint exists, return its position coordinates (x, y, z)
-        // If currentCheckpoint is null (no checkpoint set), return Vector3.zero (0, 0, 0) as fallback
-        return currentCheckpoint != null ? currentCheckpoint.position : Vector3.zero;
+        return currentCheckpoint; //Simply return the stored position
     }
 }

@@ -6,8 +6,6 @@ public class PlayerFearController : MonoBehaviour
     [SerializeField] private bool hasFearPower = false;  //Has the player unlocked fear power? Set by NPC
     [SerializeField] private float fearDuration = 5f;    //How long invisibility lasts in seconds
     [SerializeField] private float fearCooldown = 6f;    //Cooldown between uses in seconds
-    [SerializeField] private GameObject fearEffect;      //Visual effect when using fear (particles, etc.)
-    [SerializeField] private LayerMask enemyLayer;       //Layer for enemies - assign in Inspector to enemy layer
 
     private bool isFearActive = false;     //Is fear currently active? Used for enemy detection
     private bool isOnCooldown = false;     //Is fear on cooldown? Prevents spamming
@@ -74,10 +72,6 @@ public class PlayerFearController : MonoBehaviour
             }
         }
 
-        //Show visual effect (particles, aura, etc.) for better player feedback
-        if (fearEffect != null)
-            fearEffect.SetActive(true);
-
         //Start timer to automatically deactivate fear after duration ends
         StartCoroutine(DeactivateFearAfterTime());
 
@@ -123,11 +117,40 @@ public class PlayerFearController : MonoBehaviour
             }
         }
 
-        //Hide visual effect now that fear is inactive
-        if (fearEffect != null)
-            fearEffect.SetActive(false);
-
         Debug.Log("Fear deactivated. Cooldown started.");
+    }
+
+    //Method to deactivate fear power when player enters death trigger/gets sent back to checkpoint 
+    public void ForceDeactivateFear()
+    {
+        if (isFearActive)
+        {
+            // Immediately deactivate fear without starting cooldown
+            isFearActive = false;
+            isOnCooldown = false; // Reset cooldown so player can use fear again immediately
+
+            // Restore player appearance
+            if (playerSprite != null)
+            {
+                playerSprite.color = originalColor;
+            }
+
+            // Re-enable enemy collisions
+            if (playerCollider != null)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject enemy in enemies)
+                {
+                    Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+                    if (enemyCollider != null)
+                    {
+                        Physics2D.IgnoreCollision(playerCollider, enemyCollider, false);
+                    }
+                }
+            }
+
+            Debug.Log("Fear power force-deactivated due to death");
+        }
     }
 
     //Coroutine that waits for cooldown period then makes fear available again
