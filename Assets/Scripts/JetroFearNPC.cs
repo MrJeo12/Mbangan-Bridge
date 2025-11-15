@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FearNPC : MonoBehaviour
+public class JetroFearNPC : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;  //Reference to dialogue UI
 
