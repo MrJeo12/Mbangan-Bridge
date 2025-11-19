@@ -16,12 +16,20 @@ public class Dialogue : MonoBehaviour
     private bool started; //Started boolean
     private bool waitForNext; //Wait for next boolean
 
+    //To hide indicator and window when game initializes
+    private void Awake()
+    {
+        ToggleIndicator(false);
+        ToggleWindow(false);
+    }
 
+    //Window
     private void ToggleWindow(bool show)
     {
         window.SetActive(show);
     }
 
+    //Indicator
     public void ToggleIndicator(bool show)
     {
         indicator.SetActive(show);
