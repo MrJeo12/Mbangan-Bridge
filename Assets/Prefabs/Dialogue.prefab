@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 70098093180107432}
+  - component: {fileID: 24594316867708211}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -33,6 +34,23 @@ Transform:
   - {fileID: 2360888628773880219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &24594316867708211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15287867492417664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45cc9b2b49e7b0f4c86bf621e79a3875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  window: {fileID: 1579560367275163060}
+  indicator: {fileID: 3770180371131935307}
+  dialogueText: {fileID: 7721815569844707970}
+  dialogues: []
+  writingSpeed: 0.3
 --- !u!1 &1579560367275163060
 GameObject:
   m_ObjectHideFlags: 0
