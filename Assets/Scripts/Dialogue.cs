@@ -63,12 +63,17 @@ public class Dialogue : MonoBehaviour
     //End Dialogue
     public void EndDialogue()
     {
+        started = false; //Started is disabled
+        waitForNext = false; //WaitForNext is disabled
+        StopAllCoroutines(); //Stop all Ienumerators
         ToggleWindow(false); //Hide the window
     }
 
     //Writting logic
     IEnumerator Writing()
     {
+        yield return new WaitForSeconds(writingSpeed);//Wait for x seconds
+
         string currentDialogue = dialogues[index];
         dialogueText.text += currentDialogue[charIndex]; //Write the character
         charIndex++;//Increase the character index
@@ -97,12 +102,16 @@ public class Dialogue : MonoBehaviour
             waitForNext = false;
             index++;
 
+            //Check if we are in the scope of dialogues list
             if (index < dialogues.Count)
             {
+                //If so fetch next dialogue
                 GetDialogue(index);
             }
             else
             {
+                //If not end dialogue process
+                ToggleIndicator(true);
                 EndDialogue();
             }
 

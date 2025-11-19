@@ -23,6 +23,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             playerDetected = false;
             dialogueScript.ToggleIndicator(false);
+            dialogueScript.EndDialogue();
         }
     }
 
