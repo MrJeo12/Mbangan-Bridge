@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;   //Reference to the physics component
     private bool grounded;  //Tracks if the player is touching the ground
     private bool onPlatform; //Tracks if player is on a platform
+    private bool canMove = true;  //Boolean to track if player movement is allowed
+
 
     private void Awake()
     {
@@ -16,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove) return; //If movement is disabled, exit the update method early to prevent any movement processing
+
         float horizontalInput = Input.GetAxis("Horizontal");    //Get the horizontal input (-1 for left, 1 for right, 0 for no input)
         body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y); //Apply horizontal movement while preserving vertical velocity (gravity/jumping)
 
@@ -67,5 +71,12 @@ public class PlayerMovement : MonoBehaviour
         {
             onPlatform = false;
         }
+    }
+
+    //Public method to enable or disable player movement - called by PauseMenuManager during pause state
+    public void SetCanMove(bool canMove)
+    {
+        //Set the movement permission to the provided value
+        this.canMove = canMove;
     }
 }
