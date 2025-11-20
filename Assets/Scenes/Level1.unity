@@ -5883,7 +5883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: writingSpeed
-      value: 0.03
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: dialogues.Array.size
