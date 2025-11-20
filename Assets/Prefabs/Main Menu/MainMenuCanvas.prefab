@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlsPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5504578055236294616, guid: fdac7e1f03500d24ab6f31327dcd6d19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -279,27 +283,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1306174627099415947, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1306174627099415947, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3255975609559365119, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_Name
       value: SettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3255975609559365119, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7815766085861937619, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -362,6 +370,10 @@ PrefabInstance:
     - target: {fileID: 723196403866132937, guid: 162f89576e68f154787d9c10b9cf7d42, type: 3}
       propertyPath: m_Name
       value: MainMenuPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 723196403866132937, guid: 162f89576e68f154787d9c10b9cf7d42, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8169030721924570579, guid: 162f89576e68f154787d9c10b9cf7d42, type: 3}
       propertyPath: m_Pivot.x
