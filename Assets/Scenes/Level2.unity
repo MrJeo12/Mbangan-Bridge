@@ -1996,6 +1996,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReturnToMainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5990362565554281606, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990362565554281606, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990362565554281606, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6315865447874631466, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2003,6 +2015,18 @@ PrefabInstance:
     - target: {fileID: 6315865447874631466, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907138663704836084, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907138663704836084, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977461701964896128, guid: 8cae4ddc68dee2c45a3ce8b84f8c4fd6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4080,7 +4104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: dialogues.Array.size
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: 'dialogues.Array.data[0]'
@@ -4124,18 +4148,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: 'dialogues.Array.data[9]'
-      value: Do not trouble yourself with concerns for me - I am quite content in
-        my purpose here. This old wizard still has plenty of magic left to aid other
-        wayward travelers like yourself.
+      value: May your journey be filled with discovered wonders and safe passage!
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: 'dialogues.Array.data[10]'
-      value: Your companion showed remarkable courage and skill navigating past those
-        vigilant guards! A feat worthy of song and story.
+      value: When you're ready, press E infront of me to receive the Fear power -
+        and remember, you'll also need to press E to activate it when the time comes!
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: 'dialogues.Array.data[11]'
-      value: May your journey be filled with discovered wonders and safe passage!
+      value: When you're ready, press E to receive the Fear power - and remember,
+        you'll also need to press E to activate it when the time comes. May it serve
+        you as well as it did your friend.
       objectReference: {fileID: 0}
     - target: {fileID: 24594316867708211, guid: a186410875236cb428a889091f29fff4, type: 3}
       propertyPath: 'dialogues.Array.data[12]'

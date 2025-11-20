@@ -693,23 +693,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1306174627099415947, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1306174627099415947, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2222926501390892793, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3255975609559365119, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_Name
@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3255975609559365119, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4761723666869131752, guid: d4577c0a6b161b242a95d87e246893cb, type: 3}
       propertyPath: m_Color.a
