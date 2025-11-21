@@ -4,7 +4,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogueScript;
     private bool playerDetected;
-    private bool hasTriggered = false; // Add this flag to track if already triggered
+    private bool hasTriggered = false; //Add this flag to track if already triggered
 
     //Detect trigger with player
     private void OnTriggerEnter2D(Collider2D collision)
